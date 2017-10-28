@@ -8,10 +8,27 @@ export const ProgressBar = props => {
   }
 
   return (
-    <div style={style.wrapper}>
+    <Wrapper {...props}>
       <Bar {...props} />
-    </div>
+    </Wrapper>
   )
+}
+
+const Wrapper = styled.div`
+  position: relative;
+  background-color: #dddddd;
+  height: ${props => `${props.height}px`};
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+`
+
+Wrapper.propTypes = {
+  height: PropTypes.number,
+}
+
+Wrapper.defaultProps = {
+  height: 5,
 }
 
 const Bar = styled.div`
@@ -21,14 +38,6 @@ const Bar = styled.div`
   width: ${props => `${props.pct}%`};
   background-color: ${props => props.color};
 `
-
-const style = {
-  wrapper: {
-    position: 'relative',
-    backgroundColor: 'lightGrey',
-    height: 5,
-  },
-}
 
 ProgressBar.propTypes = {
   pct: PropTypes.number,

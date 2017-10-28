@@ -1,9 +1,15 @@
-import { configure } from '@storybook/react';
+import React from 'react'
+import { configure, addDecorator } from '@storybook/react'
 
 const req = require.context('../src/components', true, /\.stories\.js$/)
 
-function loadStories() {
-  req.keys().forEach((filename) => req(filename))
+const styles = {
+  fontFamily: '"Avenir Next", Helvetica, sans-serif',
 }
+const FontDecorator = story => <div style={styles}>{story()}</div>
 
-configure(loadStories, module);
+addDecorator(FontDecorator)
+
+const loadStories = () => req.keys().forEach(filename => req(filename))
+
+configure(loadStories, module)
